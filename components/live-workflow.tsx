@@ -103,7 +103,7 @@ export function LiveWorkflow({
   }, {})
 
   return (
-    <div className="flex gap-6 items-start">
+    <div className="flex gap-6 items-stretch min-h-[calc(100vh-10rem)]">
       {/* Left: records list */}
       <div className="flex-1 min-w-0 space-y-6">
         {Object.entries(grouped).map(([mod, recs]) => {
@@ -160,7 +160,7 @@ export function LiveWorkflow({
       </div>
 
       {/* Right: action panel */}
-      <div className="w-96 shrink-0 sticky top-8">
+      <div className="w-[28rem] shrink-0 sticky top-8 self-start">
         {selectedRecord ? (
           <div className="border border-white/[0.08] rounded-xl bg-white/[0.03] shadow-lg overflow-hidden">
             <div className="px-5 py-4 border-b border-white/[0.06] bg-white/[0.02]">
@@ -228,7 +228,7 @@ export function LiveWorkflow({
                   <p className="text-[10px] uppercase tracking-widest text-neutral-500 mb-2 font-semibold">
                     History
                   </p>
-                  <div className="space-y-1.5 max-h-64 overflow-y-auto">
+                  <div className="space-y-1.5 max-h-80 overflow-y-auto">
                     {recordsForSelected.map((ar) => (
                       <div
                         key={ar.id}
@@ -257,7 +257,7 @@ export function LiveWorkflow({
             </div>
           </div>
         ) : (
-          <div className="border border-white/[0.06] rounded-xl bg-white/[0.02] p-8 text-center">
+          <div className="border border-white/[0.06] rounded-xl bg-white/[0.02] p-8 text-center min-h-[24rem] flex items-center justify-center">
             <p className="text-neutral-500 text-sm">Select a record to view actions</p>
           </div>
         )}

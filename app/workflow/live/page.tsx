@@ -42,7 +42,7 @@ export default async function LiveWorkflowPage() {
   console.log(`[supabase] action_requests:`, { count: actionRequests?.length ?? 0, error: arError?.message ?? null })
 
   return (
-    <div className="max-w-5xl space-y-8">
+    <div className="space-y-6 h-full">
       <div>
         <h2 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-violet-400 to-pink-400 bg-clip-text text-transparent">
           Live Workflow
