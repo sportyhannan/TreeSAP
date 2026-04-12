@@ -44,10 +44,10 @@ export default async function LiveWorkflowPage() {
   return (
     <div className="max-w-5xl space-y-8">
       <div>
-        <h2 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-violet-600 to-pink-500 bg-clip-text text-transparent">
+        <h2 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-violet-400 to-pink-400 bg-clip-text text-transparent">
           Live Workflow
         </h2>
-        <p className="text-sm text-gray-400 mt-1">
+        <p className="text-sm text-neutral-500 mt-1">
           Select a record and trigger AI actions routed through Lava. High-sensitivity records are restricted to summarize and review only.
         </p>
       </div>

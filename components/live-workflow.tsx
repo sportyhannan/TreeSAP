@@ -30,19 +30,19 @@ const sensitivityAllowed: Record<string, ActionType[]> = {
 }
 
 const moduleColors: Record<string, string> = {
-  finance: 'from-emerald-50 to-green-50 border-emerald-200',
-  procurement: 'from-orange-50 to-amber-50 border-orange-200',
-  sales: 'from-blue-50 to-cyan-50 border-blue-200',
-  hr: 'from-pink-50 to-rose-50 border-pink-200',
-  operations: 'from-amber-50 to-yellow-50 border-amber-200',
+  finance: 'from-emerald-500/10 to-emerald-500/5 border-emerald-500/30',
+  procurement: 'from-orange-500/10 to-orange-500/5 border-orange-500/30',
+  sales: 'from-blue-500/10 to-blue-500/5 border-blue-500/30',
+  hr: 'from-pink-500/10 to-pink-500/5 border-pink-500/30',
+  operations: 'from-amber-500/10 to-amber-500/5 border-amber-500/30',
 }
 
 const moduleBadge: Record<string, string> = {
-  finance: 'bg-emerald-100 text-emerald-700',
-  procurement: 'bg-orange-100 text-orange-700',
-  sales: 'bg-blue-100 text-blue-700',
-  hr: 'bg-pink-100 text-pink-700',
-  operations: 'bg-amber-100 text-amber-700',
+  finance: 'bg-emerald-500/15 text-emerald-400',
+  procurement: 'bg-orange-500/15 text-orange-400',
+  sales: 'bg-blue-500/15 text-blue-400',
+  hr: 'bg-pink-500/15 text-pink-400',
+  operations: 'bg-amber-500/15 text-amber-400',
 }
 
 export function LiveWorkflow({
@@ -100,7 +100,7 @@ export function LiveWorkflow({
     <div className="space-y-8">
       {/* Records grid */}
       <div>
-        <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
+        <h3 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-3">
           Select a record
         </h3>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -114,30 +114,30 @@ export function LiveWorkflow({
                   setLatestOutput(null)
                   setError(null)
                 }}
-                className={`text-left p-4 rounded-xl border-2 transition-all bg-gradient-to-br ${
-                  moduleColors[r.table_name] ?? 'from-gray-50 to-gray-50 border-gray-200'
-                } ${isSelected ? 'ring-2 ring-violet-400 scale-[1.02] shadow-md' : 'hover:shadow-sm'}`}
+                className={`text-left p-4 rounded-xl border transition-all bg-gradient-to-br ${
+                  moduleColors[r.table_name] ?? 'from-neutral-800 to-neutral-900 border-neutral-700'
+                } ${isSelected ? 'ring-2 ring-violet-500 scale-[1.02] shadow-lg shadow-violet-500/10' : 'hover:shadow-md hover:shadow-white/5'}`}
               >
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="font-mono font-bold text-sm text-gray-900">
+                  <span className="font-mono font-bold text-sm text-white">
                     {r.sap_record_id}
                   </span>
-                  <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${moduleBadge[r.table_name] ?? 'bg-gray-100 text-gray-600'}`}>
+                  <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${moduleBadge[r.table_name] ?? 'bg-neutral-800 text-neutral-400'}`}>
                     {r.table_name}
                   </span>
                 </div>
                 <div className="flex items-center gap-2 text-xs">
                   <span className={`px-2 py-0.5 rounded-full font-medium border ${
-                    r.status === 'synced' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
-                    r.status === 'pending' ? 'bg-amber-50 text-amber-700 border-amber-200' :
-                    'bg-red-50 text-red-700 border-red-200'
+                    r.status === 'synced' ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/20' :
+                    r.status === 'pending' ? 'bg-amber-500/15 text-amber-400 border-amber-500/20' :
+                    'bg-red-500/15 text-red-400 border-red-500/20'
                   }`}>
                     {r.status}
                   </span>
                   <span className={`px-2 py-0.5 rounded-full font-medium border ${
                     r.sensitivity_class === 'high'
-                      ? 'bg-pink-50 text-pink-700 border-pink-200'
-                      : 'bg-cyan-50 text-cyan-700 border-cyan-200'
+                      ? 'bg-pink-500/15 text-pink-400 border-pink-500/20'
+                      : 'bg-cyan-500/15 text-cyan-400 border-cyan-500/20'
                   }`}>
                     {r.sensitivity_class}
                   </span>
@@ -150,12 +150,12 @@ export function LiveWorkflow({
 
       {/* Action panel */}
       {selectedRecord && (
-        <div className="border border-gray-200 rounded-xl bg-white shadow-sm overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-100 bg-gray-50/50">
-            <h3 className="font-semibold text-gray-900">
+        <div className="border border-white/[0.08] rounded-xl bg-white/[0.03] shadow-lg overflow-hidden">
+          <div className="px-6 py-4 border-b border-white/[0.06] bg-white/[0.02]">
+            <h3 className="font-semibold text-white">
               Actions for {selectedRecord.sap_record_id}
             </h3>
-            <p className="text-xs text-gray-400 mt-0.5">
+            <p className="text-xs text-neutral-500 mt-0.5">
               Sensitivity: {selectedRecord.sensitivity_class} — {
                 selectedRecord.sensitivity_class === 'high'
                   ? 'restricted to summarize & review only'
@@ -174,10 +174,10 @@ export function LiveWorkflow({
                     key={at}
                     onClick={() => handleTrigger(at)}
                     disabled={!allowed || isPending}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium border transition-all ${
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                       allowed
-                        ? 'bg-violet-600 text-white border-violet-600 hover:bg-violet-700 disabled:opacity-50'
-                        : 'bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed'
+                        ? 'bg-violet-600 text-white hover:bg-violet-500 shadow-md shadow-violet-500/20 disabled:opacity-50'
+                        : 'bg-white/[0.04] text-neutral-600 border border-white/[0.06] cursor-not-allowed'
                     }`}
                   >
                     {isPending ? 'Processing...' : at}
@@ -188,18 +188,18 @@ export function LiveWorkflow({
 
             {/* Error */}
             {error && (
-              <div className="p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">
+              <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
                 {error}
               </div>
             )}
 
             {/* Latest AI output */}
             {latestOutput && (
-              <div className="p-4 rounded-lg bg-violet-50 border border-violet-200">
+              <div className="p-5 rounded-lg bg-violet-500/10 border border-violet-500/20">
                 <p className="text-[10px] uppercase tracking-widest text-violet-400 mb-2 font-semibold">
                   AI Output (via Lava)
                 </p>
-                <p className="text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">
+                <p className="text-sm text-neutral-200 whitespace-pre-wrap leading-relaxed">
                   {latestOutput}
                 </p>
               </div>
@@ -208,30 +208,30 @@ export function LiveWorkflow({
             {/* Action history for this record */}
             {recordsForSelected.length > 0 && (
               <div>
-                <p className="text-[10px] uppercase tracking-widest text-gray-400 mb-2 font-semibold">
+                <p className="text-[10px] uppercase tracking-widest text-neutral-500 mb-2 font-semibold">
                   Action History
                 </p>
                 <div className="space-y-2">
                   {recordsForSelected.map((ar) => (
                     <div
                       key={ar.id}
-                      className="p-3 rounded-lg border border-gray-100 bg-gray-50/50 text-sm"
+                      className="p-3 rounded-lg border border-white/[0.06] bg-white/[0.02] text-sm"
                     >
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="font-medium text-gray-700">{ar.action_type}</span>
+                        <span className="font-medium text-neutral-300">{ar.action_type}</span>
                         <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold border ${
-                          ar.status === 'synced' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
-                          ar.status === 'pending' ? 'bg-amber-50 text-amber-700 border-amber-200' :
-                          'bg-red-50 text-red-700 border-red-200'
+                          ar.status === 'synced' ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/20' :
+                          ar.status === 'pending' ? 'bg-amber-500/15 text-amber-400 border-amber-500/20' :
+                          'bg-red-500/15 text-red-400 border-red-500/20'
                         }`}>
                           {ar.status}
                         </span>
-                        <span className="text-xs text-gray-400 ml-auto">
+                        <span className="text-xs text-neutral-600 ml-auto">
                           {new Date(ar.created_at).toLocaleString()}
                         </span>
                       </div>
                       {ar.ai_output && (
-                        <p className="text-xs text-gray-500 mt-1 line-clamp-2">
+                        <p className="text-xs text-neutral-400 mt-1 line-clamp-2">
                           {ar.ai_output}
                         </p>
                       )}
