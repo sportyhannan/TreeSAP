@@ -6,11 +6,11 @@ import { revalidatePath } from 'next/cache'
 import type { ModuleSlug, ActionType } from './types'
 
 const moduleTableMap: Record<ModuleSlug, string> = {
-  finance: 'finance',
-  procurement: 'procurement',
-  sales: 'sales',
-  hr: 'hr',
-  operations: 'operations',
+  finance: 'finance_records',
+  procurement: 'procurement_records',
+  sales: 'sales_records',
+  hr: 'hr_records',
+  operations: 'operations_records',
 }
 
 export async function triggerAction(

@@ -2,14 +2,23 @@ import { supabase } from '@/lib/supabase'
 import { LiveWorkflow } from '@/components/live-workflow'
 import type { ModuleSlug } from '@/lib/types'
 
-const modules: ModuleSlug[] = ['finance', 'procurement', 'sales', 'hr', 'operations']
+const moduleToTable: Record<ModuleSlug, string> = {
+  finance: 'finance_records',
+  procurement: 'procurement_records',
+  sales: 'sales_records',
+  hr: 'hr_records',
+  operations: 'operations_records',
+}
+const modules = Object.keys(moduleToTable) as ModuleSlug[]
 
 export const dynamic = 'force-dynamic'
 
 export default async function LiveWorkflowPage() {
   // Fetch all records from all module tables
   const recordPromises = modules.map(async (mod) => {
-    const { data, error } = await supabase.from(mod).select('*').order('created_at', { ascending: false })
+    const table = moduleToTable[mod]
+    const { data, error } = await supabase.from(table).select('*').order('created_at', { ascending: false })
+    console.log(`[supabase] ${table}:`, { count: data?.length ?? 0, error: error?.message ?? null })
     if (error) return []
     return (data ?? []).map((r) => ({
       id: String(r.id),
@@ -23,12 +32,14 @@ export default async function LiveWorkflowPage() {
 
   const allRecordArrays = await Promise.all(recordPromises)
   const allRecords = allRecordArrays.flat()
+  console.log(`[supabase] total records loaded: ${allRecords.length}`)
 
   // Fetch all action requests
-  const { data: actionRequests } = await supabase
+  const { data: actionRequests, error: arError } = await supabase
     .from('action_requests')
     .select('*')
     .order('created_at', { ascending: false })
+  console.log(`[supabase] action_requests:`, { count: actionRequests?.length ?? 0, error: arError?.message ?? null })
 
   return (
     <div className="max-w-5xl space-y-8">
