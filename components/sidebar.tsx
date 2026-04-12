@@ -4,7 +4,8 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const navItems = [
-  { href: '/', label: 'Schemas' },
+  { href: '/', label: 'RFC Document' },
+  { href: '/schemas', label: 'Schemas' },
   { href: '/sample-data', label: 'Sample Data' },
   { href: '/workflow', label: 'Workflow Demo' },
 ]

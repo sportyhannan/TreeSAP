@@ -1,20 +1,19 @@
-import { schemas } from '@/lib/mock-data'
-import { SchemaView } from '@/components/schema-view'
-
-export default function SchemasPage() {
+export default function RfcPage() {
   return (
-    <div className="max-w-4xl space-y-8">
+    <div className="max-w-5xl space-y-6">
       <div>
-        <h2 className="text-2xl font-bold tracking-tight">Schemas</h2>
+        <h2 className="text-2xl font-bold tracking-tight">RFC: SAP</h2>
         <p className="text-sm text-foreground/50 mt-1">
-          Data models defined in the SAP guardrail RFC. Five module tables plus the action_requests table that drives the AI workflow.
+          Context-aware guardrail architecture for AI-enhanced SAP workflows.
         </p>
       </div>
 
-      <div className="grid gap-6">
-        {schemas.map((schema) => (
-          <SchemaView key={schema.table} schema={schema} />
-        ))}
+      <div className="border border-foreground/10 rounded-lg overflow-hidden bg-foreground/[0.02]">
+        <iframe
+          src="/RFC-SAP.pdf"
+          className="w-full h-[calc(100vh-12rem)]"
+          title="RFC-SAP Document"
+        />
       </div>
     </div>
   )
