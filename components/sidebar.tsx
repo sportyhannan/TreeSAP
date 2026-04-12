@@ -8,6 +8,7 @@ const navItems = [
   { href: '/schemas', label: 'Schemas' },
   { href: '/sample-data', label: 'Sample Data' },
   { href: '/workflow', label: 'Workflow Demo' },
+  { href: '/workflow/live', label: 'Live Workflow' },
 ]
 
 export function Sidebar() {
