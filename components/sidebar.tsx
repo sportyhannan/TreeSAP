@@ -4,10 +4,10 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const navItems = [
-  { href: '/', label: 'RFC Document', icon: '\u{1F4C4}' },
-  { href: '/schemas', label: 'Schemas', icon: '\u{1F5C2}\uFE0F' },
-  { href: '/sample-data', label: 'Sample Data', icon: '\u{1F4CA}' },
-  { href: '/workflow', label: 'Workflow Demo', icon: '\u26A1' },
+  { href: '/', label: 'RFC Document' },
+  { href: '/schemas', label: 'Schemas' },
+  { href: '/sample-data', label: 'Sample Data' },
+  { href: '/workflow', label: 'Workflow Demo' },
 ]
 
 export function Sidebar() {
@@ -34,7 +34,6 @@ export function Sidebar() {
                   : 'text-neutral-400 hover:text-white hover:bg-white/5'
               }`}
             >
-              <span className="text-base">{item.icon}</span>
               {item.label}
             </Link>
           )
